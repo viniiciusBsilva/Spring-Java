@@ -17,10 +17,10 @@ public class DemoApplication {
 		Order order = new Order(1309,95.90,0.0);
 		Desconto desconto = new Desconto();
 		ShippingService shippingService = new ShippingService();
-		OrderService orderService = new OrderService(desconto);
+		OrderService orderService = new OrderService(desconto, shippingService);
 		System.out.printf("Pedido Código "+ order.getCode());
 		System.out.println();
-		System.out.printf("Valor Total: R$%.2f ", (orderService.total(order)+shippingService.shipment(order)));
+		System.out.printf("Valor Total: R$%.2f ", orderService.total(order));
 	}
 
 }

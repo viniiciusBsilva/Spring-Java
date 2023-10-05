@@ -6,13 +6,15 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class OrderService {
-    private Order order;
     private Desconto desconto;
+    private ShippingService shippingService;
 
-    public OrderService(Desconto desconto){
+    public OrderService(Desconto desconto, ShippingService shippingService) {
         this.desconto = desconto;
+        this.shippingService = shippingService;
     }
+
     public double total(Order order){
-        return order.getBasic()-desconto.descontarValor(order.getBasic(), order.getDiscount());
+        return (order.getBasic()-desconto.descontarValor(order.getBasic(), order.getDiscount()))+shippingService.shipment(order);
     }
 }
